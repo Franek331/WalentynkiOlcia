@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walentynkowe zapytanie</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fddfdf; /* Pastelowy róż */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        #valentine-container {
+            background-color: #ffffff; /* Biały */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #e84969; /* Ciemny róż */
+        }
+
+        #yes, #no {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 0 10px;
+            cursor: pointer;
+            background-color: #e84969; /* Ciemny róż */
+            color: #fff; /* Biały */
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        #yes:hover, #no:hover {
+            background-color: #c23852; /* Trochę ciemniejszy róż przy najechaniu */
+        }
+        #mis{
+            position: absolute;
+            margin-top: -50px;
+            margin-left: 500px;
+            width: 200px;
+            height: 200px;
+        }
+        #mis2{
+            position: absolute;
+            margin-top: -50px;
+            margin-left: -500px;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    
+
+<div id="valentine-container">
+    <div id="question">Czy zostaniesz moją Walentynką?</div>
+    <button id="yes" onclick="handleResponse(true)">Tak</button>
+    <button id="no" onmouseover="runAway()" onmouseout="stopRunningAway()" onclick="handleResponse(false)">Nie</button>
+</div>
+<img id="mis"src="Ma.png" alt="">
+<img id="mis2"src="Ma.png" alt="">
+
+<script>
+    let isRunningAway = false;
+
+    function runAway() {
+        isRunningAway = true;
+        moveButton();
+    }
+
+    function stopRunningAway() {
+        isRunningAway = false;
+    }
+
+    function moveButton() {
+        if (isRunningAway) {
+            const button = document.getElementById('no');
+            const newPositionX = Math.random() * (window.innerWidth - button.clientWidth);
+            const newPositionY = Math.random() * (window.innerHeight - button.clientHeight);
+
+            button.style.position = 'absolute';
+            button.style.left = newPositionX + 'px';
+            button.style.top = newPositionY + 'px';
+
+            setTimeout(moveButton, 1000);
+        }
+    }
+
+    function handleResponse(response) {
+    if (response) {
+        // Ustawienie odpowiedzi na 'yes' i wysłanie do serwera PHP
+            if (xhr.status == 200 && xhr.responseText.includes('zapisana')) {
+                alert('Dziękuję! Odpowiedź "Tak".');
+            } else {
+                alert('Wystąpił błąd podczas zapisywania odpowiedzi.');
+            }
+
+    } else {
+        alert('Odpowiedź "Nie". Trzymaj się!');
+    }
+}
+
+</script>
+
+</body>
+
+</html>
+
+
